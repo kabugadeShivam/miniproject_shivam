@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krushi Mitra - Farmer Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --krushi-green: #2e8b57;
+            --krushi-teal: #20b2aa;
+            --krushi-gold: #daa520;
+            --krushi-light: #f8f9fa;
+            --krushi-dark: #343a40;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, var(--krushi-dark), #495057);
+            color: white;
+            height: 100vh;
+            position: fixed;
+            width: 250px;
+            transition: all 0.3s;
+        }
+        
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .profile-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .profile-header {
+            background: linear-gradient(90deg, var(--krushi-green), var(--krushi-teal));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid white;
+            object-fit: cover;
+            margin: -60px auto 10px;
+            background-color: #ddd;
+        }
+        
+        .uid-badge {
+            background: var(--krushi-light);
+            border: 1px dashed var(--krushi-green);
+            border-radius: 5px;
+            padding: 8px 12px;
+            font-family: monospace;
+            font-weight: bold;
+            color: var(--krushi-green);
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--krushi-green);
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.8);
+            border-radius: 5px;
+            margin: 5px 0;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .crop-badge {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 5px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+        }
+        
+        .progress-bar {
+            background-color: var(--krushi-green);
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                overflow: hidden;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="p-3 text-center">
+            <h4 class="mb-0"><i class="fas fa-leaf me-2"></i>Krushi Mitra</h4>
+            <small class="text-muted">Farmer Dashboard</small>
+        </div>
+        <hr class="bg-secondary">
+        <ul class="nav flex-column p-3">
+            <li class="nav-item">
+                <a class="nav-link active" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-user"></i> Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-tractor"></i> Farm Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-rupee-sign"></i> Schemes & Benefits</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-shopping-basket"></i> Marketplace</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-chart-line"></i> Analytics</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-cog"></i> Settings</a>
+            </li>
+            <li class="nav-item mt-4">
+                <a class="nav-link text-warning" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3><i class="fas fa-tachometer-alt me-2"></i> Farmer Dashboard</h3>
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+                    <i class="fas fa-user me-1"></i> Shivam Kabugade
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Profile Card -->
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <h5>Farmer Profile</h5>
+                    </div>
+                    <div class="text-center">
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="profile-pic" alt="Profile Picture">
+                        <h5 class="mb-1">Shivam Kabugade</h5>
+                        <p class="text-muted mb-2">Maharashtra, India</p>
+                        <div class="uid-badge mb-3">KM-MAH-SK-1234-567-8910</div>
+                        <div class="d-flex justify-content-center mb-3">
+                            <button class="btn btn-sm btn-outline-primary me-2"><i class="fas fa-edit me-1"></i> Edit</button>
+                            <button class="btn btn-sm btn-outline-success"><i class="fas fa-id-card me-1"></i> ID Card</button>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="fas fa-phone me-2 text-muted"></i> Mobile</span>
+                            <span>+91 9876543210</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="fas fa-id-card me-2 text-muted"></i> Aadhaar</span>
+                            <span>XXXX-XXXX-1234</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span><i class="fas fa-calendar me-2 text-muted"></i> Member Since</span>
+                            <span>15 Jan 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Farm Summary -->
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="stat-card">
+                            <h6><i class="fas fa-vector-square me-2 text-success"></i> Total Land Area</h6>
+                            <h3>5.2 <small class="text-muted">acres</small></h3>
+                            <div class="progress mt-2">
+                                <div class="progress-bar" style="width: 65%"></div>
+                            </div>
+                            <small class="text-muted">65% under cultivation</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="stat-card">
+                            <h6><i class="fas fa-rupee-sign me-2 text-success"></i> Annual Income</h6>
+                            <h3>₹2,45,000</h3>
+                            <div class="d-flex justify-content-between mt-2">
+                                <small class="text-success"><i class="fas fa-arrow-up me-1"></i> 12% from last year</small>
+                                <small class="text-muted">2023-24</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="stat-card">
+                            <h6><i class="fas fa-tractor me-2 text-success"></i> Equipment</h6>
+                            <div class="d-flex justify-content-between">
+                                <h3>4</h3>
+                                <button class="btn btn-sm btn-outline-success">View All</button>
+                            </div>
+                            <small class="text-muted">2 Tractors, 1 Harvester, 1 Plough</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="stat-card">
+                            <h6><i class="fas fa-seedling me-2 text-success"></i> Current Crops</h6>
+                            <div>
+                                <span class="crop-badge">Cotton</span>
+                                <span class="crop-badge">Soybean</span>
+                                <span class="crop-badge">Wheat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schemes Card -->
+                <div class="stat-card mt-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h6 class="mb-0"><i class="fas fa-certificate me-2 text-success"></i> Active Schemes</h6>
+                        <a href="#" class="btn btn-sm btn-outline-success">View All</a>
+                    </div>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex justify-content-between">
+                                <span>PM Kisan Samman Nidhi</span>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            <small class="text-muted">₹6,000/year in 3 installments</small>
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <div class="d-flex justify-content-between">
+                                <span>Soil Health Card</span>
+                                <span class="badge bg-success">Active</span>
+                            </div>
+                            <small class="text-muted">Free soil testing every 2 years</small>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="stat-card">
+            <h5 class="mb-3"><i class="fas fa-history me-2 text-success"></i> Recent Activity</h5>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Activity</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>15 Oct 2023</td>
+                            <td>Applied for PM Kisan Scheme</td>
+                            <td><span class="badge bg-success">Approved</span></td>
+                            <td><a href="#" class="btn btn-sm btn-outline-primary">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>10 Oct 2023</td>
+                            <td>Sold Cotton (200kg) in Marketplace</td>
+                            <td><span class="badge bg-success">Completed</span></td>
+                            <td><a href="#" class="btn btn-sm btn-outline-primary">View</a></td>
+                        </tr>
+                        <tr>
+                            <td>05 Oct 2023</td>
+                            <td>Soil Testing Scheduled</td>
+                            <td><span class="badge bg-warning">Pending</span></td>
+                            <td><a href="#" class="btn btn-sm btn-outline-primary">View</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample data for demonstration
+        const farmerData = {
+            name: "Shivam Kabugade",
+            uid: "KM-MAH-SK-1234-567-8910",
+            mobile: "+91 9876543210",
+            aadhaar: "XXXX-XXXX-1234",
+            location: "Nashik, Maharashtra",
+            landArea: 5.2,
+            cultivationPercentage: 65,
+            annualIncome: 245000,
+            incomeGrowth: 12,
+            equipment: ["Tractor (2)", "Harvester", "Plough"],
+            currentCrops: ["Cotton", "Soybean", "Wheat"],
+            activeSchemes: [
+                { name: "PM Kisan Samman Nidhi", benefit: "₹6,000/year in 3 installments", status: "Active" },
+                { name: "Soil Health Card", benefit: "Free soil testing every 2 years", status: "Active" }
+            ],
+            activities: [
+                { date: "15 Oct 2023", activity: "Applied for PM Kisan Scheme", status: "Approved" },
+                { date: "10 Oct 2023", activity: "Sold Cotton (200kg) in Marketplace", status: "Completed" },
+                { date: "05 Oct 2023", activity: "Soil Testing Scheduled", status: "Pending" }
+            ]
+        };
+
+        // In a real implementation, you would fetch this data from your backend API
+        console.log("Farmer Data:", farmerData);
+    </script>
+</body>
+</html>
