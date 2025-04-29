@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krushi Mitra - Farmer Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --krushi-green: #2e8b57;
+            --krushi-teal: #20b2aa;
+            --krushi-gold: #daa520;
+            --krushi-light: #f5f7fa;
+        }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .registration-card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: none;
+        }
+        
+        .header-banner {
+            background: linear-gradient(135deg, var(--krushi-green), var(--krushi-teal));
+            padding: 25px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .header-banner::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--krushi-light);
+            rotate: 45deg;
+            z-index: 1;
+        }
+        
+        .form-section {
+            padding: 30px;
+        }
+        
+        .form-icon {
+            color: var(--krushi-green);
+            font-size: 1.1rem;
+        }
+        
+        .form-control {
+            border-left: 3px solid var(--krushi-green);
+            border-radius: 0 5px 5px 0;
+            padding-left: 15px;
+        }
+        
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(46, 139, 87, 0.25);
+            border-color: var(--krushi-teal);
+        }
+        
+        .btn-krushi {
+            background: linear-gradient(to right, var(--krushi-green), var(--krushi-teal));
+            border: none;
+            border-radius: 50px;
+            padding: 12px 0;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-krushi:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.4);
+        }
+        
+        .uid-card {
+            background: var(--krushi-light);
+            border: 2px dashed var(--krushi-green);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+        
+        .uid-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .uid-number {
+            font-family: 'Courier New', monospace;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--krushi-green);
+            letter-spacing: 1px;
+        }
+        
+        .farmer-illustration {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+        }
+        
+        .progress-tracker {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .progress-tracker::before {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #dee2e6;
+            z-index: 0;
+        }
+        
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #dee2e6;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .step.active {
+            background: var(--krushi-green);
+            color: white;
+        }
+        
+        .benefits-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .benefits-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .benefits-list li:last-child {
+            border-bottom: none;
+        }
+        
+        @media (max-width: 768px) {
+            .illustration-column {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="registration-card">
+                    <div class="header-banner">
+                        <h2><i class="fas fa-id-card me-2"></i> Farmer Registration</h2>
+                        <p class="mb-0">Get your unique Krushi Mitra ID</p>
+                    </div>
+                    
+                    <div class="row g-0">
+                        <!-- Form Column -->
+                        <div class="col-md-7">
+                            <div class="form-section">
+                                <div class="progress-tracker">
+                                    <div class="step active">1</div>
+                                    <div class="step">2</div>
+                                    <div class="step">3</div>
+                                </div>
+                                
+                                <h4 class="mb-4 text-center">Farmer Details</h4>
+                                
+                                <form id="farmerRegistrationForm">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">First Name</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="form-icon fas fa-user"></i></span>
+                                                <input type="text" class="form-control" id="firstName" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">Last Name</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="form-icon fas fa-user"></i></span>
+                                                <input type="text" class="form-control" id="lastName" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Mobile Number</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="form-icon fas fa-phone"></i></span>
+                                            <input type="tel" class="form-control" id="mobileNumber" pattern="[0-9]{10}" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Aadhaar Number</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="form-icon fas fa-id-card"></i></span>
+                                            <input type="text" class="form-control" id="aadhaarNumber" pattern="[0-9]{12}" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">State</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="form-icon fas fa-map-marker-alt"></i></span>
+                                                <select class="form-select" id="state" required>
+                                                    <option value="">Select State</option>
+                                                    <option>Maharashtra</option>
+                                                    <option>Punjab</option>
+                                                    <option>Uttar Pradesh</option>
+                                                    <option>Tamil Nadu</option>
+                                                    <option>Karnataka</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">District</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="form-icon fas fa-map-marker"></i></span>
+                                                <input type="text" class="form-control" id="district" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Village</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="form-icon fas fa-home"></i></span>
+                                            <input type="text" class="form-control" id="village" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Land Area (acres)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="form-icon fas fa-vector-square"></i></span>
+                                            <input type="number" class="form-control" id="landArea" min="0.1" step="0.1" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Main Crops</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text"><i class="form-icon fas fa-seedling"></i></span>
+                                            <input type="text" class="form-control" id="mainCrops" placeholder="e.g. Wheat, Rice, Cotton" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-4 form-check">
+                                        <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                        <label class="form-check-label" for="agreeTerms">I agree to the <a href="#" class="text-primary">Terms & Conditions</a></label>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-krushi w-100 text-white mb-3">
+                                        <i class="fas fa-user-plus me-2"></i> Generate Farmer ID
+                                    </button>
+                                    
+                                    <div id="uidResult" class="d-none">
+                                        <div class="uid-card">
+                                            <h5 class="text-success mb-3"><i class="fas fa-id-badge me-2"></i> Your Farmer ID</h5>
+                                            <div class="uid-number mb-2" id="generatedUID"></div>
+                                            <small class="text-muted">Please save this ID for future reference</small>
+                                        </div>
+                                        
+                                        <div class="alert alert-success">
+                                            <i class="fas fa-check-circle me-2"></i> Registration successful! Proceed to complete your profile.
+                                        </div>
+                                        
+                                        <button type="button" class="btn btn-outline-primary w-100">
+                                            <i class="fas fa-user-edit me-2"></i> Complete Profile
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <!-- Illustration Column -->
+                        <div class="col-md-5 illustration-column">
+                            <div class="h-100 d-flex flex-column justify-content-center p-4">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3069/3069172.png" alt="Happy Farmer" class="farmer-illustration mb-4">
+                                
+                                <div class="benefits-box">
+                                    <h5 class="text-success mb-3"><i class="fas fa-gift me-2"></i> Benefits of Registration</h5>
+                                    <ul class="benefits-list">
+                                        <li><i class="fas fa-check-circle text-success me-2"></i> Unique Farmer ID for all services</li>
+                                        <li><i class="fas fa-check-circle text-success me-2"></i> Access to government schemes</li>
+                                        <li><i class="fas fa-check-circle text-success me-2"></i> Direct marketplace access</li>
+                                        <li><i class="fas fa-check-circle text-success me-2"></i> Personalized farming advice</li>
+                                        <li><i class="fas fa-check-circle text-success me-2"></i> Weather alerts and crop advisories</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('farmerRegistrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const mobile = document.getElementById('mobileNumber').value.trim();
+            const aadhaar = document.getElementById('aadhaarNumber').value.trim();
+            const state = document.getElementById('state').value;
+            const district = document.getElementById('district').value.trim();
+            const village = document.getElementById('village').value.trim();
+            const landArea = document.getElementById('landArea').value;
+            const mainCrops = document.getElementById('mainCrops').value.trim();
+            
+            // Generate UID components
+            const stateCode = state.substring(0, 3).toUpperCase();
+            const initials = (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
+            const aadhaarLast4 = aadhaar.slice(-4);
+            const mobileLast3 = mobile.slice(-3);
+            const timestamp = new Date().getTime().toString().slice(-4);
+            
+            // Create UID (Format: KM-STATE-INITIALS-AADHAARLAST4-MOBLAST3-TIMESTAMP)
+            const farmerUID = `KM-${stateCode}-${initials}-${aadhaarLast4}-${mobileLast3}-${timestamp}`;
+            
+            // Display the generated UID
+            document.getElementById('generatedUID').textContent = farmerUID;
+            document.getElementById('uidResult').classList.remove('d-none');
+            
+            // Scroll to the UID display
+            document.getElementById('uidResult').scrollIntoView({ behavior: 'smooth' });
+            
+            // Here you would typically send data to backend
+            const farmerData = {
+                uid: farmerUID,
+                firstName,
+                lastName,
+                mobile,
+                aadhaar,
+                state,
+                district,
+                village,
+                landArea,
+                mainCrops,
+                registrationDate: new Date().toISOString()
+            };
+            
+            console.log('Farmer Data:', farmerData);
+            alert('Registration successful! Your Farmer ID: ' + farmerUID);
+        });
+    </script>
+</body>
+</html>
