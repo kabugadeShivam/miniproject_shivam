@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishi Mitra - Find Bulk Buyers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary: #4CAF50;
+            --secondary: #8BC34A;
+            --accent: #1E88E5;
+            --dark: #2E7D32;
+            --light: #F1F8E9;
+            --text: #333;
+            --white: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: var(--dark);
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark);
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        /* Steps Section */
+        .steps {
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+        
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            background: var(--light);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .step-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Search Section */
+        .search {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+        
+        .search-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .search-form input, .search-form select {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .search-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        /* Buyers Section */
+        .buyers {
+            padding: 60px 0;
+        }
+        
+        .buyers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .buyer-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .buyer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .buyer-img {
+            height: 150px;
+            background: #ddd;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .buyer-info {
+            padding: 20px;
+        }
+        
+        .buyer-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .buyer-rating {
+            color: #FFC107;
+            margin-bottom: 10px;
+        }
+        
+        .buyer-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 60px 0;
+            background: var(--light);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ddd;
+            display: block;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: var(--white);
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .steps-container {
+                flex-direction: column;
+            }
+            
+            .step {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Hero Section -->
+    <header>
+        <div class="hero-content">
+            <h1>Connect Directly with Bulk Buyers</h1>
+            <p>Sell your harvest faster at better prices with Krishi Mitra - The farmer's trusted marketplace</p>
+            <a href="#search" class="btn">List Your Produce Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </header>
+
+    <!-- Steps Section -->
+    <section class="steps">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sell in Just 3 Easy Steps</h2>
+                <p>Get the best price for your crops without middlemen</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <h3>List Your Product</h3>
+                    <p>Fill simple details about your crop, quantity and expected price</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Get Buyer Requests</h3>
+                    <p>Bulk buyers and agri-businesses will contact you with offers</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Secure Deal</h3>
+                    <p>Choose the best offer and confirm the sale with secure payment</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search" id="search">
+        <div class="container">
+            <div class="section-title">
+                <h2>Find Bulk Buyers Near You</h2>
+                <p>Connect with verified buyers looking for your produce</p>
+            </div>
+            
+            <div class="search-box">
+                <form class="search-form">
+                    <input type="text" placeholder="Search for crop (e.g. Wheat, Tomatoes)">
+                    <select>
+                        <option value="">Select Location</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="up">Uttar Pradesh</option>
+                        <option value="punjab">Punjab</option>
+                        <option value="karnataka">Karnataka</option>
+                    </select>
+                    <select>
+                        <option value="">Quantity Available</option>
+                        <option value="1ton">1 Ton</option>
+                        <option value="5ton">5 Tons</option>
+                        <option value="10ton">10+ Tons</option>
+                    </select>
+                    <button type="submit" class="search-btn">Search Buyers</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buyers Section -->
+    <section class="buyers">
+        <div class="container">
+            <div class="section-title">
+                <h2>Verified Bulk Buyers</h2>
+                <p>Trusted agri-businesses ready to purchase your produce</p>
+            </div>
+            
+            <div class="buyers-grid">
+                <!-- Buyer 1 -->
+                <div class="buyer-card">
+                    <div class="buyer-img" style="background-image: url('https://images.unsplash.com/photo-1581349485608-9469926a8e5e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="buyer-info">
+                        <h3>Agro Foods India</h3>
+                        <div class="buyer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(42)</span>
+                        </div>
+                        <div class="buyer-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Pune, Maharashtra</span>
+                            <span><i class="fas fa-shopping-basket"></i> 50+ Orders</span>
+                        </div>
+                        <p>Looking for: Wheat, Rice, Pulses (Min 5 Tons)</p>
+                        <a href="#" class="btn">Contact Buyer</a>
+                    </div>
+                </div>
+                
+                <!-- Buyer 2 -->
+                <div class="buyer-card">
+                    <div class="buyer-img" style="background-image: url('https://images.unsplash.com/photo-1556910633-8b8c4c9a1f31?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="buyer-info">
+                        <h3>FreshMart Supermarkets</h3>
+                        <div class="buyer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(36)</span>
+                        </div>
+                        <div class="buyer-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</span>
+                            <span><i class="fas fa-shopping-basket"></i> 120+ Orders</span>
+                        </div>
+                        <p>Looking for: Vegetables, Fruits (Min 2 Tons)</p>
+                        <a href="#" class="btn">Contact Buyer</a>
+                    </div>
+                </div>
+                
+                <!-- Buyer 3 -->
+                <div class="buyer-card">
+                    <div class="buyer-img" style="background-image: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="buyer-info">
+                        <h3>Green Valley Exports</h3>
+                        <div class="buyer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(78)</span>
+                        </div>
+                        <div class="buyer-meta">
+                            <span><i class="fas fa-map-marker-alt"></i> Delhi</span>
+                            <span><i class="fas fa-shopping-basket"></i> 200+ Orders</span>
+                        </div>
+                        <p>Looking for: Organic Produce (Min 10 Tons)</p>
+                        <a href="#" class="btn">Contact Buyer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Farmers Say</h2>
+                <p>Success stories from farmers using Krishi Mitra</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Sold my wheat at 22% higher price than local market. Krishi Mitra saved me from middlemen exploitation."
+                    </div>
+                    <div class="testimonial-author">
+                        - Ramesh Patil, Maharashtra
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "Got 5 bulk buyers for my tomato crop within 2 days. The payment was direct and secure. Very happy!"
+                    </div>
+                    <div class="testimonial-author">
+                        - Priya Reddy, Karnataka
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a small farmer, I never thought I could sell directly to exporters. Krishi Mitra made it possible."
+                    </div>
+                    <div class="testimonial-author">
+                        - Amit Singh, Punjab
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Krishi Mitra</h3>
+                    <p>Empowering farmers by connecting them directly with bulk buyers across India.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#">How It Works</a>
+                    <a href="#">Buyer Directory</a>
+                    <a href="#">Selling Guide</a>
+                    <a href="#">Price Trends</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Farmers Helpline</a>
+                    <p><i class="fas fa-phone"></i> +91 1800 123 4567</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Download App</h3>
+                    <a href="#"><img src="https://via.placeholder.com/150x50?text=Google+Play" alt="Google Play" style="margin-bottom: 10px;"></a>
+                    <a href="#"><img src="https://via.placeholder.com/150x50?text=App+Store" alt="App Store"></a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Krishi Mitra. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

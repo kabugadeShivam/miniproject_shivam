@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krushi Mitra - Seed Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --light-green: #E8F5E9;
+            --accent-yellow: #FFD600;
+            --dark-text: #263238;
+            --gray-bg: #FAFAFA;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--gray-bg);
+            color: var(--dark-text);
+        }
+        
+        /* Header Styles */
+        .marketplace-header {
+            background: linear-gradient(135deg, var(--primary-green), #1B5E20);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 2rem;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            font-size: 16px;
+            padding-left: 45px;
+        }
+        
+        .search-bar i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-green);
+        }
+        
+        /* Main Content */
+        .container {
+            display: flex;
+            padding: 2rem;
+            gap: 2rem;
+        }
+        
+        /* Filters Sidebar */
+        .filters {
+            width: 280px;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+        
+        .filter-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-green);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Seed Listing Grid */
+        .seed-listings {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .seed-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .seed-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        
+        .seed-image {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .seed-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .seed-card:hover .seed-image img {
+            transform: scale(1.1);
+        }
+        
+        .seed-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent-yellow);
+            color: #333;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .seed-details {
+            padding: 1.2rem;
+        }
+        
+        .seed-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .seed-company {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .seed-specs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .seed-spec {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: #555;
+        }
+        
+        .seed-spec i {
+            color: var(--primary-green);
+            font-size: 0.9rem;
+        }
+        
+        .seed-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-green);
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #1B5E20;
+            transform: scale(1.05);
+        }
+        
+        /* Floating Cart Button */
+        .floating-cart {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-green);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s;
+        }
+        
+        .floating-cart:hover {
+            transform: scale(1.1);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent-yellow);
+            color: #333;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .filters {
+                width: 100%;
+            }
+            
+            .seed-listings {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .marketplace-header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .search-bar {
+                margin: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Marketplace Header -->
+    <header class="marketplace-header">
+        <div class="logo">
+            <img src="https://i.imgur.com/5XQ0yTx.png" alt="Krushi Mitra Logo">
+            <h1>Krushi Mitra</h1>
+        </div>
+        
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search seeds (e.g. 'Hybrid Wheat', 'BT Cotton')...">
+        </div>
+        
+        <div class="user-actions">
+            <button style="background: none; border: none; color: white; font-size: 1.5rem;">
+                <i class="fas fa-user-circle"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filters Sidebar -->
+        <aside class="filters">
+            <div class="filter-section">
+                <h3>Categories <i class="fas fa-chevron-down"></i></h3>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="cereals" checked>
+                        <label for="cereals">Cereals (Wheat, Rice)</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="pulses" checked>
+                        <label for="pulses">Pulses</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="vegetables" checked>
+                        <label for="vegetables">Vegetables</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="fruits">
+                        <label for="fruits">Fruits</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Seed Type <i class="fas fa-chevron-down"></i></h3>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="hybrid" checked>
+                        <label for="hybrid">Hybrid</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="organic" checked>
+                        <label for="organic">Organic</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="gmo">
+                        <label for="gmo">GMO</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Price Range <i class="fas fa-chevron-down"></i></h3>
+                <div style="margin-top: 10px;">
+                    <input type="range" min="50" max="5000" value="2000" style="width: 100%;">
+                    <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                        <span>₹50</span>
+                        <span>₹2000</span>
+                        <span>₹5000+</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-section">
+                <h3>Brand <i class="fas fa-chevron-down"></i></h3>
+                <div class="filter-options">
+                    <div class="filter-option">
+                        <input type="checkbox" id="monsanto">
+                        <label for="monsanto">Monsanto</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="syngenta">
+                        <label for="syngenta">Syngenta</label>
+                    </div>
+                    <div class="filter-option">
+                        <input type="checkbox" id="nuziveedu">
+                        <label for="nuziveedu">Nuziveedu</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button style="width: 100%; padding: 12px; background-color: var(--primary-green); color: white; border: none; border-radius: 6px; margin-top: 1rem; transition: all 0.3s;" 
+                    onmouseover="this.style.transform='scale(1.02)'" 
+                    onmouseout="this.style.transform='scale(1)'">
+                Apply Filters
+            </button>
+        </aside>
+        
+        <!-- Seed Listings -->
+        <main class="seed-listings">
+            <!-- Seed Card 1 - Wheat -->
+            <div class="seed-card">
+                <div class="seed-image">
+                    <img src="https://i.imgur.com/JqYeZvL.jpg" alt="Wheat Seeds">
+                    <span class="seed-badge">Bestseller</span>
+                </div>
+                <div class="seed-details">
+                    <h3 class="seed-title">Hybrid Wheat Seed - HD 2967</h3>
+                    <p class="seed-company">By Monsanto India</p>
+                    <div class="seed-specs">
+                        <div class="seed-spec">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>90-100 Days</span>
+                        </div>
+                        <div class="seed-spec">
+                            <i class="fas fa-weight-hanging"></i>
+                            <span>5kg/ha</span>
+                        </div>
+                    </div>
+                    <div class="seed-price">
+                        <div>
+                            <span class="price">₹850</span>
+                            <span class="original-price">₹1,200</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seed Card 2 - Cotton -->
+            <div class="seed-card">
+                <div class="seed-image">
+                    <img src="https://i.imgur.com/vVXmQ0U.jpg" alt="BT Cotton">
+                    <span class="seed-badge">New</span>
+                </div>
+                <div class="seed-details">
+                    <h3 class="seed-title">BT Cotton Seeds - Bollgard II</h3>
+                    <p class="seed-company">By Mahyco</p>
+                    <div class="seed-specs">
+                        <div class="seed-spec">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>150-160 Days</span>
+                        </div>
+                        <div class="seed-spec">
+                            <i class="fas fa-weight-hanging"></i>
+                            <span>750g/ha</span>
+                        </div>
+                    </div>
+                    <div class="seed-price">
+                        <div>
+                            <span class="price">₹1,450</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seed Card 3 - Tomato -->
+            <div class="seed-card">
+                <div class="seed-image">
+                    <img src="https://i.imgur.com/8nLt3EJ.jpg" alt="Tomato Seeds">
+                    <span class="seed-badge">Organic</span>
+                </div>
+                <div class="seed-details">
+                    <h3 class="seed-title">Organic Tomato Seeds - Arka Rakshak</h3>
+                    <p class="seed-company">By IARI</p>
+                    <div class="seed-specs">
+                        <div class="seed-spec">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>75-80 Days</span>
+                        </div>
+                        <div class="seed-spec">
+                            <i class="fas fa-weight-hanging"></i>
+                            <span>100g/ha</span>
+                        </div>
+                    </div>
+                    <div class="seed-price">
+                        <div>
+                            <span class="price">₹320</span>
+                            <span class="original-price">₹400</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seed Card 4 - Rice -->
+            <div class="seed-card">
+                <div class="seed-image">
+                    <img src="https://i.imgur.com/qJtqP9h.jpg" alt="Basmati Rice">
+                    <span class="seed-badge">Limited Stock</span>
+                </div>
+                <div class="seed-details">
+                    <h3 class="seed-title">Basmati Rice - Pusa 1121</h3>
+                    <p class="seed-company">By Nuziveedu</p>
+                    <div class="seed-specs">
+                        <div class="seed-spec">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>120-125 Days</span>
+                        </div>
+                        <div class="seed-spec">
+                            <i class="fas fa-weight-hanging"></i>
+                            <span>8kg/ha</span>
+                        </div>
+                    </div>
+                    <div class="seed-price">
+                        <div>
+                            <span class="price">₹1,150</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seed Card 5 - Chilli -->
+            <div class="seed-card">
+                <div class="seed-image">
+                    <img src="https://i.imgur.com/9QZJgWQ.jpg" alt="Chilli Seeds">
+                </div>
+                <div class="seed-details">
+                    <h3 class="seed-title">Hybrid Chilli Seeds - Teja</h3>
+                    <p class="seed-company">By Syngenta</p>
+                    <div class="seed-specs">
+                        <div class="seed-spec">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>90-95 Days</span>
+                        </div>
+                        <div class="seed-spec">
+                            <i class="fas fa-weight-hanging"></i>
+                            <span>200g/ha</span>
+                        </div>
+                    </div>
+                    <div class="seed-price">
+                        <div>
+                            <span class="price">₹680</span>
+                            <span class="original-price">₹800</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seed Card 6 - Soybean -->
+            <div class="seed-card">
+                <div class="seed-image">
+                    <img src="https://i.imgur.com/5XQ0yTx.jpg" alt="Soybean Seeds">
+                </div>
+                <div class="seed-details">
+                    <h3 class="seed-title">Soybean Seeds - JS 335</h3>
+                    <p class="seed-company">By DuPont Pioneer</p>
+                    <div class="seed-specs">
+                        <div class="seed-spec">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>95-100 Days</span>
+                        </div>
+                        <div class="seed-spec">
+                            <i class="fas fa-weight-hanging"></i>
+                            <span>75kg/ha</span>
+                        </div>
+                    </div>
+                    <div class="seed-price">
+                        <div>
+                            <span class="price">₹2,350</span>
+                        </div>
+                        <button class="add-to-cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            Add
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Floating Cart Button -->
+    <div class="floating-cart">
+        <i class="fas fa-shopping-cart"></i>
+        <div class="cart-count">3</div>
+    </div>
+    
+    <script>
+        // Enhanced cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const currentCount = parseInt(document.querySelector('.cart-count').textContent);
+                document.querySelector('.cart-count').textContent = currentCount + 1;
+                
+                // Add animation
+                const card = this.closest('.seed-card');
+                card.style.boxShadow = '0 0 0 2px var(--primary-green)';
+                
+                this.innerHTML = '<i class="fas fa-check"></i> Added';
+                this.style.backgroundColor = '#4CAF50';
+                
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-shopping-cart"></i> Add';
+                    this.style.backgroundColor = '';
+                    card.style.boxShadow = '';
+                }, 1500);
+                
+                // Pulse animation on cart
+                const cart = document.querySelector('.floating-cart');
+                cart.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    cart.style.transform = '';
+                }, 300);
+            });
+        });
+        
+        // Filter toggle functionality
+        document.querySelectorAll('.filter-section h3').forEach(header => {
+            header.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                const options = this.nextElementSibling;
+                
+                if (options.style.display === 'none') {
+                    options.style.display = 'flex';
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    options.style.display = 'none';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

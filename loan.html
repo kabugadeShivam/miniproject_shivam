@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krushi Mitra - Agricultural Finance Solutions</title>
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --light-green: #81c784;
+            --dark-green: #1b5e20;
+            --gold: #ffd700;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --form-gray: #e9e9e9;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: #333;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Header Styles */
+        .finance-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .finance-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .finance-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            background-color: var(--gold);
+            color: var(--dark-green);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: #ffc400;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Loan Products Section */
+        .loan-types {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 3rem 1rem;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .loan-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 350px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .loan-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .loan-card-header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .loan-card-body {
+            padding: 1.5rem;
+        }
+        
+        .interest-rate {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            font-weight: bold;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .loan-features {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .loan-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .loan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            color: var(--primary-green);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Application Process Section */
+        .apply-section {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .apply-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .apply-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 150px;
+            margin: 1rem;
+            position: relative;
+        }
+        
+        .step-number {
+            background-color: var(--gold);
+            color: var(--dark-green);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 4rem 2rem;
+            background-color: var(--white);
+        }
+        
+        .testimonial-card {
+            background-color: var(--light-gray);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 1rem;
+            max-width: 350px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+        
+        /* Loan Detail Page */
+        .loan-detail-page {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: none;
+        }
+        
+        .loan-detail-header {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+        
+        .loan-detail-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .back-button {
+            background-color: var(--light-gray);
+            color: var(--dark-green);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .back-button:hover {
+            background-color: #e0e0e0;
+        }
+        
+        /* Application Form */
+        .application-form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: none;
+        }
+        
+        .application-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-green);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            margin-bottom: 2rem;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: var(--primary-green);
+            border-radius: 5px;
+            width: 33%;
+            transition: width 0.3s ease;
+        }
+        
+        /* Confirmation Page */
+        .confirmation-page {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .confirmation-card {
+            background-color: white;
+            padding: 3rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .confirmation-icon {
+            font-size: 4rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 4rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background-color: white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            background-color: var(--light-gray);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 1.5rem;
+            display: none;
+        }
+        
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .loan-types {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .apply-steps {
+                flex-direction: column;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Main Landing Page -->
+    <section id="main-page">
+        <section class="finance-header">
+            <h1>Agricultural Loans & Microloans</h1>
+            <p>Get access to affordable financing solutions tailored for farmers with interest rates as low as 4.5%. Grow your farm without financial worries.</p>
+            <button class="cta-button" onclick="showApplicationForm('general')">Apply Now</button>
+        </section>
+        
+        <section class="loan-types">
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <h2>Kisan Credit Card</h2>
+                </div>
+                <div class="loan-card-body">
+                    <div class="interest-rate">4.5% - 7%</div>
+                    <ul class="loan-features">
+                        <li><i class="fas fa-check-circle feature-icon"></i> Up to ₹3,00,000 limit</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Flexible repayment options</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Crop insurance included</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Quick approval within 48 hours</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> No collateral required</li>
+                    </ul>
+                    <button class="cta-button" style="width: 100%; margin-top: 1.5rem;" onclick="showLoanDetail('kisan')">Learn More</button>
+                </div>
+            </div>
+            
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <h2>Equipment Financing</h2>
+                </div>
+                <div class="loan-card-body">
+                    <div class="interest-rate">6% - 8%</div>
+                    <ul class="loan-features">
+                        <li><i class="fas fa-check-circle feature-icon"></i> Finance for tractors & machinery</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Up to 90% of equipment cost</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Repayment up to 5 years</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Special dealer discounts</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Low processing fees</li>
+                    </ul>
+                    <button class="cta-button" style="width: 100%; margin-top: 1.5rem;" onclick="showLoanDetail('equipment')">Learn More</button>
+                </div>
+            </div>
+            
+            <div class="loan-card">
+                <div class="loan-card-header">
+                    <h2>Micro Loans</h2>
+                </div>
+                <div class="loan-card-body">
+                    <div class="interest-rate">5% - 7%</div>
+                    <ul class="loan-features">
+                        <li><i class="fas fa-check-circle feature-icon"></i> Small loans from ₹5,000 to ₹50,000</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Perfect for seeds & fertilizers</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Women farmer discounts available</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Community-based approval</li>
+                        <li><i class="fas fa-check-circle feature-icon"></i> Weekly/Monthly repayment options</li>
+                    </ul>
+                    <button class="cta-button" style="width: 100%; margin-top: 1.5rem;" onclick="showLoanDetail('micro')">Learn More</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="apply-section">
+            <div class="apply-container">
+                <h2>Simple Application Process</h2>
+                <p>Get funded in just 3 easy steps</p>
+                
+                <div class="apply-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Complete Application</h3>
+                        <p>Fill our simple online form in minutes</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Document Verification</h3>
+                        <p>Upload required documents digitally</p>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Receive Funds</h3>
+                        <p>Money transferred to your account</p>
+                    </div>
+                </div>
+                
+                <button class="cta-button" style="background-color: var(--white); color: var(--primary-green);" onclick="showApplicationForm('general')">Start Application</button>
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Success Stories From Farmers Like You</h2>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Krushi Mitra's microloan helped me buy quality seeds for my small vegetable farm. The low interest rate made repayment easy after harvest."</p>
+                    <p class="testimonial-author">- Rajesh Patil, Small Farmer</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"With the equipment loan, I could finally buy a tractor. My productivity has doubled and I can take on more land now."</p>
+                    <p class="testimonial-author">- Sunita Devi, Progressive Farmer</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The Kisan Credit Card saved me during the drought season. Flexible repayment helped me manage cash flow until the next crop."</p>
+                    <p class="testimonial-author">- Vijay Kumar, Organic Farmer</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="faq-section">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary-green);">Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What documents do I need to apply for a loan?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Typically you'll need your Aadhaar card, land ownership documents (or lease agreement), bank statements from the last 6 months, and recent passport-sized photographs. The exact requirements may vary slightly depending on the loan type.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>How long does the approval process take?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>For microloans, approval can be as quick as 24 hours. For larger loans like equipment financing, the process typically takes 3-5 working days after we receive all your documents.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>Can I prepay my loan without penalties?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes! We encourage early repayment and don't charge any prepayment penalties on any of our agricultural loan products.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>What if I have a bad credit history?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We take a holistic view of your application. Even with past credit issues, we may still approve your loan if you can demonstrate current farming income and provide appropriate collateral or guarantors.</p>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+    <!-- Loan Detail Pages -->
+    <section id="kisan-loan-detail" class="loan-detail-page">
+        <button class="back-button" onclick="showMainPage()">
+            <i class="fas fa-arrow-left"></i> Back to Loans
+        </button>
+        <div class="loan-detail-header">
+            <h2>Kisan Credit Card</h2>
+            <div class="interest-rate" style="color: white; margin: 1rem 0;">4.5% - 7%</div>
+        </div>
+        <div class="loan-detail-content">
+            <h3>About This Loan</h3>
+            <p>The Kisan Credit Card is designed to meet the comprehensive credit requirements of farmers by providing financial support for cultivation needs, purchase of farm equipment, and other expenses related to farming activities.</p>
+            
+            <h3>Key Benefits</h3>
+            <ul class="loan-features">
+                <li><i class="fas fa-check-circle feature-icon"></i> <strong>Flexible withdrawal:</strong> Use as needed during cropping season</li>
+                <li><i class="fas fa-check-circle feature-icon"></i> <strong>Crop insurance:</strong> Automatic coverage included</li>
+                <li><i class="fas fa-check-circle feature-icon"></i> <strong>Interest subvention:</strong> Additional 3% rebate for timely repayment</li>
+                <li><i class="fas fa-check-circle feature-icon"></i> <strong>ATM card:</strong> Access funds anytime</li>
+                <li><i class="fas fa-check-circle feature-icon"></i> <strong>Term loan component:</strong> For investment credit needs</li>
+            </ul>
+            
+            <h3>Eligibility Criteria</h3>
+            <ul>
+                <li>Farmers - individual/joint cultivators</li>
+                <li>Sharecroppers and tenant farmers</li>
+                <li>Minimum 2 years of farming experience</li>
+                <li>Land ownership documents or lease agreement</li>
+            </ul>
+            
+            <h3>Repayment Terms</h3>
+            <p>Repayment period of up to 3 years with flexible options aligned with harvest cycles. Minimum 5% repayment required every quarter.</p>
+            
+            <button class="cta-button" style="width: 100%; margin-top: 2rem;" onclick="showApplicationForm('kisan')">Apply for Kisan Credit Card</button>
+        </div>
+    </section>
+    
+    <section id="equipment-loan-detail" class="loan-detail-page">
+        <button class="back-button" onclick="showMainPage()">
+            <i class="fas fa-arrow-left"></i> Back to Loans
+        </button>
+        <div class="loan-detail-header">
+            <h2>Equipment Financing</h2>
+            <div class="interest-rate" style="color: white; margin: 1rem 0;">6% - 8%</div>
+        </div>
+        <div class="loan-detail-content">
+            <h3>About This Loan</h3>
+            <p>Modernize your farm with our equipment financing solutions. Purchase new or used agricultural machinery with affordable repayment plans tailored to your cash flow.</p>
+            
+            <h3>Covered Equipment</h3>
+            <div class="form-row">
+                <ul class="loan-features" style="flex: 1;">
+                    <li><i class="fas fa-tractor feature-icon"></i> Tractors</li>
+                    <li><i class="fas fa-truck feature-icon"></i> Harvesters</li>
+                    <li><i class="fas fa-water feature-icon"></i> Irrigation systems</li>
+                </ul>
+                <ul class="loan-features" style="flex: 1;">
+                    <li><i class="fas fa-wind feature-icon"></i> Threshers</li>
+                    <li><i class="fas fa-tools feature-icon"></i> Tillers</li>
+                    <li><i class="fas fa-solar-panel feature-icon"></i> Solar pumps</li>
+                </ul>
+            </div>
+            
+            <h3>Special Offers</h3>
+            <div style="background-color: var(--light-gray); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                <p><i class="fas fa-star" style="color: var(--gold); margin-right: 8px;"></i> <strong>5% discount</strong> on select tractor models when financed through Krushi Mitra</p>
+                <p><i class="fas fa-star" style="color: var(--gold); margin-right: 8px;"></i> <strong>Free maintenance</strong> for first year on new equipment purchases</p>
+            </div>
+            
+            <h3>Repayment Options</h3>
+            <p>Choose from 1-5 year terms with seasonal payment options available. Loan amounts from ₹50,000 to ₹10,00,000.</p>
+            
+            <button class="cta-button" style="width: 100%; margin-top: 2rem;" onclick="showApplicationForm('equipment')">Apply for Equipment Loan</button>
+        </div>
+    </section>
+    
+    <section id="micro-loan-detail" class="loan-detail-page">
+        <button class="back-button" onclick="showMainPage()">
+            <i class="fas fa-arrow-left"></i> Back to Loans
+        </button>
+        <div class="loan-detail-header">
+            <h2>Micro Loans</h2>
+            <div class="interest-rate" style="color: white; margin: 1rem 0;">5% - 7%</div>
+        </div>
+        <div class="loan-detail-content">
+            <h3>About This Loan</h3>
+            <p>Our microloan program provides small-scale farmers with access to capital for immediate agricultural needs without the bureaucracy of traditional loans.</p>
+            
+            <h3>Common Uses</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+                <div style="background-color: var(--light-green); color: white; padding: 0.5rem 1rem; border-radius: 20px;">Seeds</div>
+                <div style="background-color: var(--light-green); color: white; padding: 0.5rem 1rem; border-radius: 20px;">Fertilizers</div>
+                <div style="background-color: var(--light-green); color: white; padding: 0.5rem 1rem; border-radius: 20px;">Pesticides</div>
+                <div style="background-color: var(--light-green); color: white; padding: 0.5rem 1rem; border-radius: 20px;">Small Tools</div>
+                <div style="background-color: var(--light-green); color: white; padding: 0.5rem 1rem; border-radius: 20px;">Livestock Feed</div>
+            </div>
+            
+            <h3>Special Program for Women Farmers</h3>
+            <div style="background-color: #f8f9fa; padding: 1rem; border-left: 4px solid var(--primary-green); margin-bottom: 1.5rem;">
+                <p>Women farmers receive an <strong>additional 0.5% interest discount</strong> and can apply through women's self-help groups for easier approval.</p>
+            </div>
+            
+            <h3>Community-Based Approval</h3>
+            <p>Applications are reviewed by local agricultural officers who understand regional farming conditions. Character references from village leaders can strengthen your application.</p>
+            
+            <button class="cta-button" style="width: 100%; margin-top: 2rem;" onclick="showApplicationForm('micro')">Apply for Microloan</button>
+        </div>
+    </section>
+    
+    <!-- Application Form -->
+    <section id="application-form" class="application-form-container">
+        <button class="back-button" onclick="showMainPage()">
+            <i class="fas fa-arrow-left"></i> Back to Loans
+        </button>
+        
+        <div class="application-form">
+            <div class="progress-container">
+                <div class="progress-bar" id="form-progress"></div>
+            </div>
+            
+            <div class="form-header">
+                <h2 id="form-title">Loan Application Form</h2>
+                <p id="form-subtitle">Complete your application in just a few steps</p>
+            </div>
+            
+            <form id="loan-application" onsubmit="submitApplication(event)">
+                <!-- Step 1: Personal Information -->
+                <div id="step1" class="form-step">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">Personal Information</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="full-name">Full Name</label>
+                            <input type="text" id="full-name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="aadhaar">Aadhaar Number</label>
+                            <input type="text" id="aadhaar" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="address">Full Address</label>
+                        <textarea id="address" class="form-control" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cta-button" style="background-color: var(--light-gray); color: var(--dark-green);" onclick="showMainPage()">Cancel</button>
+                        <button type="button" class="cta-button" onclick="nextStep(2)">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Farm Information -->
+                <div id="step2" class="form-step hidden">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">Farm Information</h3>
+                    
+                    <div class="form-group">
+                        <label for="farm-type">Type of Farming</label>
+                        <select id="farm-type" class="form-control" required>
+                            <option value="">Select...</option>
+                            <option value="crop">Crop Cultivation</option>
+                            <option value="dairy">Dairy Farming</option>
+                            <option value="poultry">Poultry Farming</option>
+                            <option value="horticulture">Horticulture</option>
+                            <option value="mixed">Mixed Farming</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="land-area">Land Area (acres)</label>
+                            <input type="number" id="land-area" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="years-farming">Years Farming</label>
+                            <input type="number" id="years-farming" class="form-control" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="land-documents">Land Ownership</label>
+                        <select id="land-documents" class="form-control" required>
+                            <option value="">Select...</option>
+                            <option value="owner">Owned</option>
+                            <option value="leased">Leased</option>
+                            <option value="family">Family Land</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="annual-income">Approximate Annual Income (₹)</label>
+                        <input type="number" id="annual-income" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cta-button" style="background-color: var(--light-gray); color: var(--dark-green);" onclick="prevStep(1)">Back</button>
+                        <button type="button" class="cta-button" onclick="nextStep(3)">Next</button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Loan Details -->
+                <div id="step3" class="form-step hidden">
+                    <h3 style="color: var(--primary-green); margin-bottom: 1.5rem;">Loan Details</h3>
+                    
+                    <div class="form-group">
+                        <label for="loan-type">Loan Type</label>
+                        <select id="loan-type" class="form-control" required>
+                            <option value="">Select...</option>
+                            <option value="kisan">Kisan Credit Card</option>
+                            <option value="equipment">Equipment Financing</option>
+                            <option value="micro">Microloan</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="loan-amount">Loan Amount Needed (₹)</label>
+                            <input type="number" id="loan-amount" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loan-purpose">Primary Purpose</label>
+                            <select id="loan-purpose" class="form-control" required>
+                                <option value="">Select...</option>
+                                <option value="seeds">Seeds/Plants</option>
+                                <option value="fertilizer">Fertilizers/Pesticides</option>
+                                <option value="equipment">Farm Equipment</option>
+                                <option value="irrigation">Irrigation</option>
+                                <option value="livestock">Livestock</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="repayment-plan">Preferred Repayment Plan</label>
+                        <select id="repayment-plan" class="form-control" required>
+                            <option value="">Select...</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="quarterly">Quarterly</option>
+                            <option value="seasonal">Seasonal (after harvest)</option>
+                            <option value="custom">Custom Plan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="agree-terms" required> I agree to the terms and conditions and authorize Krushi Mitra to verify my information
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="cta-button" style="background-color: var(--light-gray); color: var(--dark-green);" onclick="prevStep(2)">Back</button>
+                        <button type="submit" class="cta-button">Submit Application</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Confirmation Page -->
+    <section id="confirmation-page" class="confirmation-page">
+        <div class="confirmation-card">
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 style="color: var(--primary-green);">Application Submitted Successfully!</h2>
+            <p>Thank you for applying with Krushi Mitra. Your application ID is <strong id="application-id">KM2023-</strong>.</p>
+            <p>Our loan officer will contact you within 2 working days to discuss next steps.</p>
+            <div style="margin-top: 2rem;">
+                <button class="cta-button" onclick="showMainPage()">Back to Home</button>
+            </div>
+            <div style="margin-top: 1rem; font-size: 0.9rem;">
+                <p>Need immediate assistance? Call our support at <strong>1800-123-4567</strong></p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Show/hide pages
+        function showMainPage() {
+            document.getElementById('main-page').style.display = 'block';
+            document.getElementById('application-form').style.display = 'none';
+            document.getElementById('confirmation-page').style.display = 'none';
+            document.getElementById('kisan-loan-detail').style.display = 'none';
+            document.getElementById('equipment-loan-detail').style.display = 'none';
+            document.getElementById('micro-loan-detail').style.display = 'none';
+        }
+        
+        function showLoanDetail(loanType) {
+            document.getElementById('main-page').style.display = 'none';
+            
+            if (loanType === 'kisan') {
+                document.getElementById('kisan-loan-detail').style.display = 'block';
+            } else if (loanType === 'equipment') {
+                document.getElementById('

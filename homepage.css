@@ -1,0 +1,174 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+.body{
+    overflow-x: hidden;
+}
+.logo{
+    margin-left: 60px;
+}
+.name{
+    margin-left: 15px;
+
+}
+.community{
+    width: 110px;
+    height: 45px;
+    border: 5px;
+    color: white;
+    border-radius: 20px;
+    border-color: white;
+    background-color: black;
+    justify-items: left;
+    align-items: center;
+    margin-left: 900px;
+    margin-top: 10px;
+}
+.signup{
+    width: 110px;
+    height: 45px;
+    color: white;
+    border: 5px;
+    border-radius: 20px;
+    border-color: white;
+    background-color: black;
+    justify-items: left;
+    align-items: center;
+    margin-left: 35px;
+    margin-top: 10px;
+}
+.in{
+    font-size:medium;
+    font-weight: bold;
+}
+.text{
+    text-align: center;
+    
+   
+}
+.log{
+    
+    justify-content: center;
+   align-items: center;
+   padding-left: 45%;
+}
+.login{
+    width: 120px;
+    height: 60px;
+    border:0;
+    border-radius: 30px;
+    background-color: yellowgreen;
+    font-size: large;
+    font-weight: bold;
+    
+
+}
+.ctext{
+    text-align: center;
+    font-size:xx-large;
+    font-weight:bolder;
+    margin-top: 5px;
+}
+.describe{
+    font-style: italic;
+    font-size: large;
+    font-weight: 100;
+    text-align: center;
+   
+}
+.commu{
+    background-color: whitesmoke;
+}
+.login:hover{
+    background-color: rgb(86, 159, 86);
+    border: 5px;
+    border-color: black;
+    transform: scale(1.09);
+    cursor: pointer;
+}
+.create{
+    color: black;
+    width: 130px;
+    height: 65px;
+    border: 0cap;
+    border-radius: 45px;
+    margin-left: 45%;
+    font-size: x-large;
+    font-weight: bold;
+    background-color: rgba(0, 136, 0, 0.521);
+}
+.mcard{
+    display: flex;
+    flex-direction: row;
+    overflow-x:scroll;
+    scrollbar-width: none;
+    
+}
+.card{
+    margin-left: 20px;
+}
+.heading{
+    font-size: xx-large;
+    font-weight: bolder;
+    text-align: center;
+    font-stretch: expanded;
+}
+.view{
+    border-radius: 25px;
+    font-size: large;
+    font-weight: 100;
+    background-color: black;
+    color: aliceblue;
+    width: 95px;
+    height: 50px;
+    justify-items: center;
+   
+}
+.view:hover{
+    background-color: white;
+    color: black;
+    border-color: black;
+    cursor: pointer;;
+}
+.farms{
+    font-size: xx-large;
+    font-weight: bold;
+}
+.expert{
+    font-size: large;
+    font-weight: 100;
+}
+.hr{
+    margin-left: 35px;
+}
+.font{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.join{
+    width: 120px;
+    height: 55px;
+    background-color: black;
+    color: white;
+    border-radius: 30px;
+    margin-left: 45%;
+    font-size: large;
+    font-weight: bold;
+}
+.create:hover{
+    background-color: white;
+    border-color: black;
+    font-size: x-large;
+}
+.govt{
+    background-color: rgb(86, 159, 86);
+}
+.input{
+    width: 290px;
+    height: 55px;
+    border-radius: 25px;
+    margin-left: 40%;
+    margin-bottom: 20px;
+}
+

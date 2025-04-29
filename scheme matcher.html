@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krushi Mitra - Scheme Matcher</title>
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --secondary: #f5f5f5;
+            --accent: #ffc107;
+            --text: #333;
+            --card-bg: #fff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary);
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #1b5e20;
+            transform: translateY(-2px);
+        }
+        
+        .scheme-card {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--accent);
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        
+        .scheme-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .scheme-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .scheme-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background-color: #e8f5e9;
+            color: var(--primary);
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        
+        .voice-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: #333;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            border: none;
+        }
+        
+        .lang-switcher {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        
+        .lang-btn {
+            background: none;
+            border: 1px solid white;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="lang-switcher">
+                <button class="lang-btn">EN</button>
+                <button class="lang-btn">HI</button>
+                <button class="lang-btn">MR</button>
+            </div>
+            <h1><i class="fas fa-seedling"></i> Krushi Mitra</h1>
+            <p>Find your eligible government schemes in 3 simple steps</p>
+        </div>
+        
+        <div class="profile-card">
+            <h2><i class="fas fa-user-circle"></i> Your Farming Profile</h2>
+            <div class="form-group">
+                <label for="state">State</label>
+                <select id="state">
+                    <option value="">Select your state</option>
+                    <option value="maharashtra">Maharashtra</option>
+                    <option value="up">Uttar Pradesh</option>
+                    <option value="punjab">Punjab</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="land">Land Size (acres)</label>
+                <select id="land">
+                    <option value="">Select land size</option>
+                    <option value="small">2 acres</option>
+                    <option value="medium">2-5 acres</option>
+                    <option value="large">>5 acres</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="crops">Main Crops</label>
+                <select id="crops">
+                    <option value="">Select your crops</option>
+                    <option value="wheat">Wheat</option>
+                    <option value="rice">Rice</option>
+                    <option value="cotton">Cotton</option>
+                </select>
+            </div>
+            
+            <button class="btn" id="findSchemes">
+                <i class="fas fa-search"></i> Find My Schemes
+            </button>
+        </div>
+        
+        <div id="results" style="display: none;">
+            <h2><i class="fas fa-award"></i> Recommended Schemes</h2>
+            
+            <div class="scheme-card">
+                <div class="scheme-title">PM Kisan Samman Nidhi</div>
+                <div class="scheme-desc">₹6,000 per year in three equal installments to all landholding farmer families.</div>
+                <div>
+                    <span class="badge"><i class="fas fa-rupee-sign"></i> Financial Aid</span>
+                    <span class="badge"><i class="fas fa-check-circle"></i> 95% Match</span>
+                </div>
+                <button class="btn" style="margin-top: 10px; padding: 8px; background-color: var(--accent); color: #333;">
+                    <i class="fas fa-file-alt"></i> Apply Now
+                </button>
+            </div>
+            
+            <div class="scheme-card">
+                <div class="scheme-title">Soil Health Card Scheme</div>
+                <div class="scheme-desc">Free soil testing every 2 years to help farmers improve productivity through balanced use of inputs.</div>
+                <div>
+                    <span class="badge"><i class="fas fa-flask"></i> Testing</span>
+                    <span class="badge"><i class="fas fa-check-circle"></i> 88% Match</span>
+                </div>
+                <button class="btn" style="margin-top: 10px; padding: 8px; background-color: var(--accent); color: #333;">
+                    <i class="fas fa-file-alt"></i> Apply Now
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <button class="voice-btn" title="Voice Input">
+        <i class="fas fa-microphone" style="font-size: 20px;"></i>
+    </button>
+    
+    <script>
+        document.getElementById('findSchemes').addEventListener('click', function() {
+            document.getElementById('results').style.display = 'block';
+            window.scrollTo({
+                top: document.getElementById('results').offsetTop - 20,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

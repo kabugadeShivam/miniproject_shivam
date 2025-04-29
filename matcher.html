@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krushi Mitra - Government Scheme Assistance</title>
+    <style>
+        :root {
+            --primary-green: #2e7d32;
+            --light-green: #81c784;
+            --dark-green: #1b5e20;
+            --gold: #ffd700;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+            --blue: #1976d2;
+            --light-blue: #bbdefb;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: #333;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Header Styles */
+        .scheme-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        
+        .scheme-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .scheme-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .cta-button {
+            background-color: var(--gold);
+            color: var(--dark-green);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            background-color: #ffc400;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Scheme Categories */
+        .scheme-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 3rem 1rem;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .category-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 350px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .category-icon {
+            background-color: var(--blue);
+            color: var(--white);
+            font-size: 2.5rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .category-body {
+            padding: 1.5rem;
+        }
+        
+        .category-body h3 {
+            color: var(--blue);
+            margin-top: 0;
+        }
+        
+        .scheme-count {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--gold);
+            color: var(--dark-green);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Scheme List */
+        .scheme-list {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .scheme-filter {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .filter-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-green);
+        }
+        
+        .filter-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .scheme-item {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--blue);
+        }
+        
+        .scheme-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .scheme-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .scheme-name {
+            font-size: 1.3rem;
+            color: var(--blue);
+            margin: 0;
+        }
+        
+        .scheme-status {
+            background-color: var(--light-green);
+            color: var(--dark-green);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .scheme-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .detail-badge {
+            background-color: var(--light-blue);
+            color: var(--blue);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .scheme-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .action-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .primary-action {
+            background-color: var(--blue);
+            color: white;
+        }
+        
+        .secondary-action {
+            background-color: var(--light-gray);
+            color: var(--dark-green);
+        }
+        
+        .action-button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        /* Scheme Detail Page */
+        .scheme-detail-page {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: none;
+        }
+        
+        .scheme-detail-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .scheme-detail-header {
+            background-color: var(--blue);
+            color: var(--white);
+            padding: 2rem;
+        }
+        
+        .back-button {
+            background-color: var(--light-gray);
+            color: var(--dark-green);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .back-button:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .scheme-detail-body {
+            padding: 2rem;
+        }
+        
+        .benefits-section, .eligibility-section, .documents-section, .process-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            color: var(--blue);
+            border-bottom: 2px solid var(--light-blue);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-item, .eligibility-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        
+        .benefit-icon, .eligibility-icon {
+            color: var(--blue);
+            margin-right: 10px;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+        
+        /* Application Form */
+        .application-form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            display: none;
+        }
+        
+        .application-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--blue);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .scheme-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Main Scheme Page -->
+    <section id="main-scheme-page">
+        <section class="scheme-header">
+            <h1>Government Scheme Assistance</h1>
+            <p>Discover and apply for government agricultural schemes tailored for farmers like you. Get expert guidance to maximize benefits from available programs.</p>
+            <a href="scheme matcher.html"><button class="cta-button" onclick="showSchemeFilter()">Match Schemes</button></a>
+        </section>
+        
+        <section class="scheme-categories">
+            <div class="category-card" onclick="showSchemeList('subsidy')">
+                <div class="scheme-count">12 Schemes</div>
+                <div class="category-icon">
+                    <i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="category-body">
+                    <h3>Subsidy Schemes</h3>
+                    <p>Financial assistance for equipment, seeds, and inputs with government subsidies up to 75%.</p>
+                </div>
+            </div>
+            
+            <div class="category-card" onclick="showSchemeList('insurance')">
+                <div class="scheme-count">8 Schemes</div>
+                <div class="category-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="category-body">
+                    <h3>Insurance Programs</h3>
+                    <p>Crop and livestock insurance schemes to protect against natural calamities and diseases.</p>
+                </div>
+            </div>
+            
+            <div class="category-card" onclick="showSchemeList('training')">
+                <div class="scheme-count">5 Schemes</div>
+                <div class="category-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="category-body">
+                    <h3>Training Programs</h3>
+                    <p>Skill development and modern farming technique training with stipend support.</p>
+                </div>
+            </div>
+            
+            <div class="category-card" onclick="showSchemeList('women')">
+                <div class="scheme-count">7 Schemes</div>
+                <div class="category-icon">
+                    <i class="fas fa-female"></i>
+                </div>
+                <div class="category-body">
+                    <h3>Women Farmer Schemes</h3>
+                    <p>Special programs offering additional benefits for women farmers and self-help groups.</p>
+                </div>
+            </div>
+            
+            <div class="category-card" onclick="showSchemeList('organic')">
+                <div class="scheme-count">4 Schemes</div>
+                <div class="category-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="category-body">
+                    <h3>Organic Farming</h3>
+                    <p>Support for organic certification, input procurement, and market linkage.</p>
+                </div>
+            </div>
+            
+            <div class="category-card" onclick="showSchemeList('irrigation')">
+                <div class="scheme-count">6 Schemes</div>
+                <div class="category-icon">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <div class="category-body">
+                    <h3>Irrigation Support</h3>
+                    <p>Micro-irrigation, drip systems, and water conservation scheme benefits.</p>
+                </div>
+            </div>
+        </section>
+    </section>
+    
+    <!-- Scheme List Page -->
+    <section id="scheme-list-page" class="scheme-list hidden">
+        <button class="back-button" onclick="showMainSchemePage()">
+            <i class="fas fa-arrow-left"></i> Back to Categories
+        </button>
+        
+        <div class="scheme-filter">
+            <h2 style="color: var(--blue); margin-top: 0;">Find Suitable Schemes</h2>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="scheme-state">State</label>
+                    <select id="scheme-state" class="filter-control">
+                        <option value="">All States</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="up">Uttar Pradesh</option>
+                        <option value="punjab">Punjab</option>
+                        <option value="karnataka">Karnataka</option>
+                        <option value="tamilnadu">Tamil Nadu</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="scheme-category">Category</label>
+                    <select id="scheme-category" class="filter-control">
+                        <option value="">All Categories</option>
+                        <option value="subsidy">Subsidy</option>
+                        <option value="insurance">Insurance</option>
+                        <option value="training">Training</option>
+                        <option value="women">Women Farmers</option>
+                        <option value="organic">Organic Farming</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label for="scheme-search">Search</label>
+                    <input type="text" id="scheme-search" class="filter-control" placeholder="Search schemes...">
+                </div>
+                <div class="filter-group" style="align-self: flex-end;">
+                    <button class="action-button primary-action">Apply Filters</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="scheme-results">
+            <div class="scheme-item" onclick="showSchemeDetail('pm-kisan')">
+                <div class="scheme-header-row">
+                    <h3 class="scheme-name">PM Kisan Samman Nidhi</h3>
+                    <span class="scheme-status">Active</span>
+                </div>
+                <p>Income support scheme providing ₹6,000 per year in three equal installments to all landholding farmer families.</p>
+                <div class="scheme-details">
+                    <span class="detail-badge"><i class="fas fa-rupee-sign"></i> Up to ₹6,000/year</span>
+                    <span class="detail-badge"><i class="fas fa-calendar-alt"></i> Year-round</span>
+                    <span class="detail-badge"><i class="fas fa-users"></i> All Farmers</span>
+                </div>
+                <div class="scheme-actions">
+                    <button class="action-button primary-action">Apply Now</button>
+                    <button class="action-button secondary-action">View Details</button>
+                </div>
+            </div>
+            
+            <div class="scheme-item" onclick="showSchemeDetail('kcc')">
+                <div class="scheme-header-row">
+                    <h3 class="scheme-name">Kisan Credit Card (KCC)</h3>
+                    <span class="scheme-status">Active</span>
+                </div>
+                <p>Credit access scheme offering affordable loans with interest subvention for crop production and other needs.</p>
+                <div class="scheme-details">
+                    <span class="detail-badge"><i class="fas fa-percentage"></i> 4% interest</span>
+                    <span class="detail-badge"><i class="fas fa-credit-card"></i> Credit Card</span>
+                    <span class="detail-badge"><i class="fas fa-user-tie"></i> Landowners/Tenants</span>
+                </div>
+                <div class="scheme-actions">
+                    <button class="action-button primary-action">Apply Now</button>
+                    <button class="action-button secondary-action">View Details</button>
+                </div>
+            </div>
+            
+            <div class="scheme-item" onclick="showSchemeDetail('pmfby')">
+                <div class="scheme-header-row">
+                    <h3 class="scheme-name">PM Fasal Bima Yojana</h3>
+                    <span class="scheme-status">Active</span>
+                </div>
+                <p>Crop insurance scheme protecting farmers against yield losses due to natural calamities, pests & diseases.</p>
+                <div class="scheme-details">
+                    <span class="detail-badge"><i class="fas fa-shield-alt"></i> Premium from 1.5%</span>
+                    <span class="detail-badge"><i class="fas fa-cloud"></i> Weather Protection</span>
+                    <span class="detail-badge"><i class="fas fa-list"></i> 50+ Crops Covered</span>
+                </div>
+                <div class="scheme-actions">
+                    <button class="action-button primary-action">Apply Now</button>
+                    <button class="action-button secondary-action">View Details</button>
+                </div>
+            </div>
+            
+            <div class="scheme-item" onclick="showSchemeDetail('soil-health')">
+                <div class="scheme-header-row">
+                    <h3 class="scheme-name">Soil Health Card Scheme</h3>
+                    <span class="scheme-status">Active</span>
+                </div>
+                <p>Provides farmers with soil health cards containing crop-wise recommendations for nutrients/fertilizers.</p>
+                <div class="scheme-details">
+                    <span class="detail-badge"><i class="fas fa-vial"></i> Free Soil Testing</span>
+                    <span class="detail-badge"><i class="fas fa-clock"></i> Every 3 Years</span>
+                    <span class="detail-badge"><i class="fas fa-users"></i> All Farmers</span>
+                </div>
+                <div class="scheme-actions">
+                    <button class="action-button primary-action">Apply Now</button>
+                    <button class="action-button secondary-action">View Details</button>
+                </div>
+            </div>
+            
+            <div class="scheme-item" onclick="showSchemeDetail('micro-irrigation')">
+                <div class="scheme-header-row">
+                    <h3 class="scheme-name">Micro Irrigation Fund</h3>
+                    <span class="scheme-status">Active</span>
+                </div>
+                <p>Subsidy scheme for drip and sprinkler irrigation systems to improve water use efficiency.</p>
+                <div class="scheme-details">
+                    <span class="detail-badge"><i class="fas fa-tint"></i> 55% Subsidy</span>
+                    <span class="detail-badge"><i class="fas fa-tractor"></i> Small/Marginal Farmers</span>
+                    <span class="detail-badge"><i class="fas fa-map"></i> Water-Scarce Areas</span>
+                </div>
+                <div class="scheme-actions">
+                    <button class="action-button primary-action">Apply Now</button>
+                    <button class="action-button secondary-action">View Details</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Scheme Detail Page -->
+    <section id="pm-kisan-detail" class="scheme-detail-page">
+        <button class="back-button" onclick="showSchemeList()">
+            <i class="fas fa-arrow-left"></i> Back to Schemes
+        </button>
+        
+        <div class="scheme-detail-card">
+            <div class="scheme-detail-header">
+                <h2>PM Kisan Samman Nidhi</h2>
+                <p style="margin-bottom: 0;">Ministry of Agriculture & Farmers Welfare</p>
+            </div>
+            <div class="scheme-detail-body">
+                <div class="benefits-section">
+                    <h3 class="section-title"><i class="fas fa-gift"></i> Benefits</h3>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle benefit-icon"></i>
+                        <div>
+                            <strong>₹6,000 per year</strong> in three equal installments of ₹2,000 each
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle benefit-icon"></i>
+                        <div>
+                            <strong>Direct Benefit Transfer</strong> to registered bank accounts
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle benefit-icon"></i>
+                        <div>
+                            <strong>No middlemen</strong> - Amount credited directly to beneficiaries
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="eligibility-section">
+                    <h3 class="section-title"><i class="fas fa-clipboard-check"></i> Eligibility</h3>
+                    <div class="eligibility-item">
+                        <i class="fas fa-user eligibility-icon"></i>
+                        <div>All landholding farmer families with cultivable land</div>
+                    </div>
+                    <div class="eligibility-item">
+                        <i class="fas fa-id-card eligibility-icon"></i>
+                        <div>Valid Aadhaar number and bank account details required</div>
+                    </div>
+                    <div class="eligibility-item">
+                        <i class="fas fa-times-circle eligibility-icon"></i>
+                        <div>Institutional landholders and retired pensioners not eligible</div>
+                    </div>
+                </div>
+                
+                <div class="documents-section">
+                    <h3 class="section-title"><i class="fas fa-file-alt"></i> Required Documents</h3>
+                    <div class="detail-badge" style="margin-right: 8px; margin-bottom: 8px; display: inline-block;">
+                        <i class="fas fa-id-card"></i> Aadhaar Card
+                    </div>
+                    <div class="detail-badge" style="margin-right: 8px; margin-bottom: 8px; display: inline-block;">
+                        <i class="fas fa-landmark"></i> Land Ownership Documents
+                    </div>
+                    <div class="detail-badge" style="margin-right: 8px; margin-bottom: 8px; display: inline-block;">
+                        <i class="fas fa-passport"></i> Citizenship Proof
+                    </div>
+                    <div class="detail-badge" style="margin-right: 8px; margin-bottom: 8px; display: inline-block;">
+                        <i class="fas fa-file-signature"></i> Bank Account Details
+                    </div>
+                </div>
+                
+                <div class="process-section">
+                    <h3 class="section-title"><i class="fas fa-tasks"></i> Application Process</h3>
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="background-color: var(--blue); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">1</div>
+                        <div>Visit nearest Common Service Center (CSC) or Agriculture Department office</div>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="background-color: var(--blue); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">2</div>
+                        <div>Fill Form with personal, land and bank details</div>
+                    </div>
+                    <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                        <div style="background-color: var(--blue); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">3</div>
+                        <div>Submit documents for verification</div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <div style="background-color: var(--blue); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 1rem;">4</div>
+                        <div>Receive confirmation SMS upon approval</div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; text-align: center;">
+                    <button class="cta-button" style="background-color: var(--blue);" onclick="showApplicationForm('pm-kisan')">Apply Now</button>
+                    <button class="cta-button" style="background-color: var(--light-gray); color: var(--dark-green); margin-left: 1rem;">Download Guidelines (PDF)</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Application Form -->
+    <section id="scheme-application-form" class="application-form-container hidden">
+        <button class="back-button" onclick="showSchemeDetail('pm-kisan')">
+            <i class="fas fa-arrow-left"></i> Back to Scheme
+        </button>
+        
+        <div class="application-form">
+            <div class="form-header">
+                <h2 id="form-title">PM Kisan Samman Nidhi Application</h2>
+                <p id="form-subtitle">Fill your details to apply for this scheme</p>
+            </div>
+            
+            <form id="scheme-application" onsubmit="submitSchemeApplication(event)">
+                <div class="form-group">
+                    <label for="applicant-name">Full Name (as per Aadhaar)</label>
+                    <input type="text" id="applicant-name" class="form-control" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="applicant-aadhaar">Aadhaar Number</label>
+                        <input type="text" id="applicant-aadhaar" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicant-mobile">Mobile Number</label>
+                        <input type="tel" id="applicant-mobile" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="applicant-address">Residential Address</label>
+                    <textarea id="applicant-address" class="form-control" rows="3" required></textarea>
+                </div>
+                
+                <h3 style="color: var(--blue); margin-bottom: 1.5rem;">Land Details</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="land-district">District</label>
+                        <input type="text" id="land-district" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="land-taluka">Taluka/Block</label>
+                        <input type="text" id="land-taluka" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="land-village">Village</label>
+                        <input type="text" id="land-village" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="land-area">Total Land Area (acres)</label>
+                        <input type="number" id="land-area" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="land-doc">Land Ownership Document Number</label>
+                    <input type="text" id="land-doc" class="form-control" required>
+                    <small style="color: #666;">7/12 extract number or equivalent land record</small>
+                </div>
+                
+                <h3 style="color: var(--blue); margin-bottom: 1.5rem;">Bank Details</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bank-name">Bank Name</label>
+                        <input type="text" id="bank-name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bank-branch">Branch Name</label>
+                        <input type="text" id="bank-branch" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="account-number">Account Number</label>
+                        <input type="text" id="account-number" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="account-ifsc">IFSC Code</label>
+                        <input type="text" id="account-ifsc" class="form-control" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="agree-declaration" required> I declare that the information provided is correct to the best of my knowledge. I understand that false information may lead to rejection of my application.
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="cta-button" style="background-color: var(--light-gray); color: var(--dark-green);" onclick="showSchemeDetail('pm-kisan')">Cancel</button>
+                    <button type="submit" class="cta-button" style="background-color: var(--blue);">Submit Application</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Confirmation Page -->
+    <section id="scheme-confirmation" class="scheme-detail-page hidden" style="text-align: center;">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <div style="font-size: 4rem; color: var(--blue); margin-bottom: 1rem;">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 style="color: var(--blue);">Application Submitted Successfully!</h2>
+            <p>Your application for PM Kisan Samman Nidhi has been received.</p>
+            <p style="font-weight: 600;">Application ID: <span style="color: var(--blue);">PMK-2023-</span></p>
+            
+            <div style="background-color: var(--light-blue); padding: 1rem; border-radius: 8px; margin: 2rem 0;">
+                <h4 style="margin-top: 0; color: var(--blue);">Next Steps</h4>
+                <p>1. Your application will be verified within 15 working days</p>
+                <p>2. You'll receive an SMS confirmation upon approval</p>
+                <p>3. First installment will be credited to your registered bank account</p>
+            </div>
+            
+            <button class="cta-button" onclick="showMainSchemePage()" style="background-color: var(--blue);">Back to Home</button>
+            
+            <div style="margin-top: 2rem; font-size: 0.9rem;">
+                <p>Need help? Contact PM Kisan Helpline: <strong>1800-115-526</strong></p>
+                <p>Or visit your nearest Agriculture Department office</p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Navigation functions
+        function showMainSchemePage() {
+            document.getElementById('main-scheme-page').style.display = 'block';
+            document.getElementById('scheme-list-page').style.display = 'none';
+            document.getElementById('pm-kisan-detail').style.display = 'none';
+            document.getElementById('scheme-application-form').style.display = 'none';
+            document.getElementById('scheme-confirmation').style.display = 'none';
+        }
+        
+        function showSchemeFilter() {
+            document.getElementById('main-scheme-page').style.display = 'none';
+            document.getElementById('scheme-list-page').style.display = 'block';
+        }
+        
+        function showSchemeList(category) {
+            document.getElementById('main-scheme-page').style.display = 'none';
+            document.getElementById('scheme-list-page').style.display = 'block';
+            // In a real app, you would filter schemes by category here
+        }
+        
+        function showSchemeDetail(scheme) {
+            document.getElementById('scheme-list-page').style.display = 'none';
+            if (scheme === 'pm-kisan') {
+                document.getElementById('pm-kisan-detail').style.display = 'block';
+            }
+            // Add other scheme details as needed
+        }
+        
+        function showApplicationForm(scheme) {
+            document.getElementById('pm-kisan-detail').style.display = 'none';
+            document.getElementById('scheme-application-form').style.display = 'block';
+            // Set form title based on scheme
+            document.getElementById('form-title').textContent = scheme === 'pm-kisan' ? 
+                'PM Kisan Samman Nidhi Application' : 'Scheme Application Form';
+        }
+        
+        function submitSchemeApplication(e) {
+            e.preventDefault();
+            document.getElementById('scheme-application-form').style.display = 'none';
+            document.getElementById('scheme-confirmation').style.display = 'block';
+            
+            // Generate random application ID
+            const appId = 'PMK-2023-' + Math.floor(100000 + Math.random() * 900000);
+            document.querySelector('#scheme-confirmation span').textContent = appId;
+        }
+        
+        // Toggle FAQ items
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishi Mitra - Farm Expert Assistance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reusing previous styles with additions */
+        :root {
+            --primary: #4CAF50;
+            --secondary: #8BC34A;
+            --accent: #1E88E5;
+            --dark: #2E7D32;
+            --light: #F1F8E9;
+            --text: #333;
+            --white: #fff;
+            --expert-blue: #1976D2;
+        }
+        
+        /* Expert Section Specific Styles */
+        .expert-hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604871000636-074fa5117945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 120px 0;
+            text-align: center;
+        }
+        
+        .expert-benefits {
+            background-color: var(--light);
+            padding: 60px 0;
+        }
+        
+        .benefits-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .benefit-card {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--expert-blue);
+            margin-bottom: 20px;
+        }
+        
+        .expert-process {
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .process-steps::before {
+            content: "";
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            z-index: 1;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--expert-blue);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 20px;
+            border: 5px solid var(--light);
+        }
+        
+        .expert-team {
+            padding: 60px 0;
+            background-color: var(--light);
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .expert-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .expert-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .expert-img {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .expert-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .expert-info h3 {
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+        
+        .expert-specialty {
+            color: var(--expert-blue);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .expert-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .expert-form {
+            padding: 60px 0;
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: var(--white);
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 40px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255,255,255,0.9);
+        }
+        
+        .form-submit {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+        
+        .form-submit:hover {
+            background: #1565C0;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .process-steps::before {
+                display: none;
+            }
+            
+            .process-step {
+                margin-bottom: 30px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Expert Hero Section -->
+    <section class="expert-hero">
+        <div class="container">
+            <h1>Government-Assigned Farm Experts</h1>
+            <p class="hero-subtitle">Get personalized agricultural guidance to maximize your farm's productivity and profits</p>
+            <a href="#expert-form" class="btn">Request Expert Assistance <i class="fas fa-user-tie"></i></a>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="expert-benefits">
+        <div class="container">
+            <div class="section-title">
+                <h2>How Our Experts Help You</h2>
+                <p>Government-verified agricultural specialists provide complete farm management solutions</p>
+            </div>
+            
+            <div class="benefits-container">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Crop Planning</h3>
+                    <p>Scientific crop selection and rotation planning based on your soil and climate conditions</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>Water Management</h3>
+                    <p>Optimal irrigation solutions including drip/sprinkler system recommendations</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Pest Control</h3>
+                    <p>Integrated pest management with eco-friendly solutions to protect your crops</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3>Soil Health</h3>
+                    <p>Soil testing and nutrient management for improved fertility and yield</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3>Market Access</h3>
+                    <p>Guidance on government schemes and direct market linkages for better prices</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Tech Integration</h3>
+                    <p>Implementation of smart farming technologies for precision agriculture</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="expert-process">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Simple 4-step process to get your dedicated farm expert</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Register Your Farm</h3>
+                    <p>Provide basic details about your farm location, size and current practices</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Expert Matching</h3>
+                    <p>Government system assigns the most suitable expert based on your needs</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Farm Visit</h3>
+                    <p>Expert conducts detailed assessment and creates customized plan</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Ongoing Support</h3>
+                    <p>Regular follow-ups via visits, calls and Krishi Mitra app</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expert Team Section -->
+    <section class="expert-team">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Expert Panel</h2>
+                <p>Government-certified agricultural specialists serving farmers</p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Expert 1 -->
+                <div class="expert-card">
+                    <div class="expert-img" style="background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="expert-info">
+                        <h3>Dr. Rajesh Kumar</h3>
+                        <p class="expert-specialty">Soil Scientist (12 years experience)</p>
+                        <p>Specializes in soil health management and organic farming</p>
+                        <div class="expert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">850+</div>
+                                <div class="stat-label">Farmers Helped</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">42%</div>
+                                <div class="stat-label">Avg. Yield Increase</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Expert 2 -->
+                <div class="expert-card">
+                    <div class="expert-img" style="background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="expert-info">
+                        <h3>Priya Sharma</h3>
+                        <p class="expert-specialty">Horticulture Specialist (8 years)</p>
+                        <p>Expert in fruit cultivation and greenhouse management</p>
+                        <div class="expert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">620+</div>
+                                <div class="stat-label">Farmers Helped</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">35%</div>
+                                <div class="stat-label">Cost Reduction</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Expert 3 -->
+                <div class="expert-card">
+                    <div class="expert-img" style="background-image: url('https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                    <div class="expert-info">
+                        <h3>Arjun Patel</h3>
+                        <p class="expert-specialty">Water Management Expert</p>
+                        <p>Specializes in micro-irrigation and water conservation</p>
+                        <div class="expert-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">720+</div>
+                                <div class="stat-label">Farmers Helped</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">60%</div>
+                                <div class="stat-label">Water Saved</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+                <p>Farmers who transformed their yields with expert guidance</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "After expert guidance, my paddy yield increased from 22 to 38 quintals per acre. The soil health management techniques changed everything!"
+                    </div>
+                    <div class="testimonial-author">
+                        - Vijay Reddy, Andhra Pradesh
+                    </div>
+                    <div class="expert-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The drip irrigation system recommended by my expert reduced water usage by 40% while increasing my vegetable production."
+                    </div>
+                    <div class="testimonial-author">
+                        - Sunita Devi, Bihar
+                    </div>
+                    <div class="expert-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "With proper crop rotation and organic techniques, my input costs reduced by 30% and I got premium prices for my organic produce."
+                    </div>
+                    <div class="testimonial-author">
+                        - Rameshwar Singh, Punjab
+                    </div>
+                    <div class="expert-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expert Request Form -->
+    <section class="expert-form" id="expert-form">
+        <div class="container">
+            <div class="form-container">
+                <h2>Request Your Farm Expert</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" placeholder="Enter 10-digit mobile number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Farm Location</label>
+                        <select id="location" required>
+                            <option value="">Select District</option>
+                            <option value="nashik">Nashik</option>
+                            <option value="vidarbha">Vidarbha</option>
+                            <option value="marathwada">Marathwada</option>
+                            <option value="konkan">Konkan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="farm-size">Farm Size (acres)</label>
+                        <input type="number" id="farm-size" placeholder="Enter farm area" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="crops">Current Crops</label>
+                        <input type="text" id="crops" placeholder="e.g. Wheat, Soybean, Vegetables">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="challenges">Main Challenges</label>
+                        <textarea id="challenges" rows="3" placeholder="Describe your farming challenges"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="form-submit">Submit Request <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Government Scheme Badges -->
+    <section class="scheme-badges">
+        <div class="container">
+            <div class="section-title">
+                <h3>Supported by Government Schemes</h3>
+            </div>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 20px;">
+                <img src="https://via.placeholder.com/150x80?text=PM-KISAN" alt="PM-KISAN" style="height: 80px;">
+                <img src="https://via.placeholder.com/150x80?text=Soil+Health+Card" alt="Soil Health Card" style="height: 80px;">
+                <img src="https://via.placeholder.com/150x80?text=Neem+Coated+Urea" alt="Neem Coated Urea" style="height: 80px;">
+                <img src="https://via.placeholder.com/150x80?text=PKVY" alt="PKVY" style="height: 80px;">
+            </div>
+        </div>
+    </section>
+</body>
+</html>

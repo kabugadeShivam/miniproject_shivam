@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krushi Mitra - Contract Farming</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --light-green: #E8F5E9;
+            --accent-yellow: #FFD600;
+            --dark-text: #263238;
+            --card-bg: #fff;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            color: var(--dark-text);
+        }
+        
+        .contract-header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        /* Contract Cards */
+        .contract-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contract-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .contract-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .contract-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .contract-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .contract-card:hover .contract-image img {
+            transform: scale(1.1);
+        }
+        
+        .contract-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-yellow);
+            color: #333;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .contract-details {
+            padding: 1.5rem;
+        }
+        
+        .contract-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-green);
+        }
+        
+        .contract-company {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .company-logo {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .contract-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .spec-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .spec-icon {
+            color: var(--primary-green);
+            font-size: 1.2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #1B5E20;
+            transform: translateY(-2px);
+        }
+        
+        /* Filter Section */
+        .filter-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            min-width: 200px;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            background: white;
+            padding: 3rem 0;
+            margin: 3rem 0;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background: var(--light-green);
+        }
+        
+        .step-number {
+            background: var(--primary-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: bold;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contract-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="contract-header">
+        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Contract Farming Opportunities</h1>
+        <p style="font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
+            Secure guaranteed markets for your produce with pre-agreed prices from reputed agri-businesses
+        </p>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <h3 style="margin-bottom: 1rem;">Find Suitable Contracts</h3>
+            <div class="filter-group">
+                <select class="filter-select">
+                    <option value="">Select Crop</option>
+                    <option value="tomato">Tomato</option>
+                    <option value="potato">Potato</option>
+                    <option value="cotton">Cotton</option>
+                </select>
+                
+                <select class="filter-select">
+                    <option value="">Select Duration</option>
+                    <option value="6">6 Months</option>
+                    <option value="12">1 Year</option>
+                    <option value="24">2 Years</option>
+                </select>
+                
+                <select class="filter-select">
+                    <option value="">Select Company</option>
+                    <option value="itc">ITC Limited</option>
+                    <option value="pepsi">PepsiCo</option>
+                    <option value="nestle">Nestle</option>
+                </select>
+                
+                <button class="btn" style="margin-left: auto;">
+                    <i class="fas fa-search"></i> Search Contracts
+                </button>
+            </div>
+        </div>
+        
+        <!-- Contract Listings -->
+        <h2 style="color: var(--primary-green);">Available Contracts</h2>
+        <div class="contract-grid">
+            <!-- Contract 1 -->
+            <div class="contract-card">
+                <div class="contract-image">
+                    <img src="https://images.unsplash.com/photo-1594282418426-1f7abfc39b73?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Tomato Farming">
+                </div>
+                <div class="contract-details">
+                    <h3 class="contract-title">Tomato Processing Contract</h3>
+                    <div class="contract-company">
+                        <img src="https://logo.clearbit.com/itcportal.com" alt="ITC Logo" class="company-logo">
+                        <span>ITC Limited</span>
+                    </div>
+                    
+                    <div class="contract-specs">
+                        <div class="spec-item">
+                            <i class="fas fa-calendar-alt spec-icon"></i>
+                            <span>12 Month Contract</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-rupee-sign spec-icon"></i>
+                            <span>₹18/kg Guaranteed</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-tractor spec-icon"></i>
+                            <span>Technical Support</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-map-marker-alt spec-icon"></i>
+                            <span>Maharashtra, Karnataka</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn" style="width: 100%; text-align: center;">
+                        <i class="fas fa-file-contract"></i> View Details
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Contract 2 -->
+            <div class="contract-card">
+                <div class="contract-image">
+                    <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Potato Farming">
+                </div>
+                <div class="contract-details">
+                    <h3 class="contract-title">Potato Chip Contract</h3>
+                    <div class="contract-company">
+                        <img src="https://logo.clearbit.com/pepsico.com" alt="PepsiCo Logo" class="company-logo">
+                        <span>PepsiCo India</span>
+                    </div>
+                    
+                    <div class="contract-specs">
+                        <div class="spec-item">
+                            <i class="fas fa-calendar-alt spec-icon"></i>
+                            <span>24 Month Contract</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-rupee-sign spec-icon"></i>
+                            <span>₹25/kg Guaranteed</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-tractor spec-icon"></i>
+                            <span>Free Seed Supply</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-map-marker-alt spec-icon"></i>
+                            <span>Punjab, Gujarat</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn" style="width: 100%; text-align: center;">
+                        <i class="fas fa-file-contract"></i> View Details
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Contract 3 -->
+            <div class="contract-card">
+                <div class="contract-image">
+                    <img src="https://images.unsplash.com/photo-1589128777073-263566ae5e4d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Basmati Farming">
+                </div>
+                <div class="contract-details">
+                    <h3 class="contract-title">Organic Basmati Contract</h3>
+                    <div class="contract-company">
+                        <img src="https://logo.clearbit.com/nestle.com" alt="Nestle Logo" class="company-logo">
+                        <span>Nestle India</span>
+                    </div>
+                    
+                    <div class="contract-specs">
+                        <div class="spec-item">
+                            <i class="fas fa-calendar-alt spec-icon"></i>
+                            <span>36 Month Contract</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-rupee-sign spec-icon"></i>
+                            <span>₹45/kg Guaranteed</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-tractor spec-icon"></i>
+                            <span>Organic Certification</span>
+                        </div>
+                        <div class="spec-item">
+                            <i class="fas fa-map-marker-alt spec-icon"></i>
+                            <span>Haryana, Uttarakhand</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn" style="width: 100%; text-align: center;">
+                        <i class="fas fa-file-contract"></i> View Details
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- How It Works Section -->
+    <div class="how-it-works">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-green);">How Contract Farming Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Register Your Farm</h3>
+                    <p>Provide basic details about your land and farming practices</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Browse Contracts</h3>
+                    <p>Find suitable agreements from agri-businesses</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Sign Agreement</h3>
+                    <p>Digitally sign contract with terms and conditions</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Start Farming</h3>
+                    <p>Receive inputs and technical support as per contract</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Benefits Section -->
+    <div class="container" style="margin-bottom: 3rem;">
+        <h2 style="text-align: center; color: var(--primary-green); margin-bottom: 2rem;">Benefits of Contract Farming</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <div style="background: var(--light-green); width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--primary-green);">
+                    <i class="fas fa-hand-holding-usd" style="font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 0.5rem;">Guaranteed Prices</h3>
+                <p style="color: #666;">Fixed rates protect you from market fluctuations</p>
+            </div>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <div style="background: var(--light-green); width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--primary-green);">
+                    <i class="fas fa-seedling" style="font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 0.5rem;">Quality Inputs</h3>
+                <p style="color: #666;">Receive high-quality seeds and fertilizers</p>
+            </div>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <div style="background: var(--light-green); width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--primary-green);">
+                    <i class="fas fa-graduation-cap" style="font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 0.5rem;">Technical Support</h3>
+                <p style="color: #666;">Expert guidance for better yields</p>
+            </div>
+            
+            <div style="background: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <div style="background: var(--light-green); width: 50px; height: 50px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; color: var(--primary-green);">
+                    <i class="fas fa-truck" style="font-size: 1.5rem;"></i>
+                </div>
+                <h3 style="margin-bottom: 0.5rem;">Assured Market</h3>
+                <p style="color: #666;">No need to worry about selling your produce</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simple filter functionality
+        document.querySelector('.btn').addEventListener('click', function() {
+            alert('Filter functionality will be implemented with backend integration');
+        });
+        
+        // Animate cards on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.contract-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.mainn{
+    display: flex;
+    flex-direction: column;
+ }
+ .news{
+     background-color:cornsilk;
+     border-radius: 15px;
+     margin-top: 5px;
+     padding-left: 5px;
+     
+     
+ }
